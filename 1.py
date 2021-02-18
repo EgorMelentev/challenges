@@ -1,5 +1,6 @@
 import csv
 
+
 def csv_dict(variables_file: str):
     reader = csv.reader(open(variables_file, 'r'))
     result = {}
@@ -8,16 +9,19 @@ def csv_dict(variables_file: str):
         result[key] = row[1]
     return result
 
+
 def filter_by_rating(d: dict, rating: str):
     """
-    Given a dictionary of some items with star ratings and a specified star rating.\n
-    Return a new dictionary of items which match the specified star rating.
+    Given a dictionary of some items with star ratings and a specified\n
+    star rating, return a new dictionary of items which match\n
+    the specified star rating.
     """
     result = {}
     for item, star in d.items():
         if (star == rating):
             result[item] = star
     return result
+
 
 csv_file_name = "rating.csv"
 dictionary = csv_dict(csv_file_name)

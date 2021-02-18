@@ -1,5 +1,6 @@
 import csv
 
+
 def csv_dict(variables_file: str):
     reader = csv.reader(open(variables_file, 'r'))
     result = {}
@@ -7,6 +8,7 @@ def csv_dict(variables_file: str):
         key = row[0]
         result[key] = row[1]
     return result
+
 
 class Smoothie:
     global prices
@@ -38,6 +40,7 @@ class Smoothie:
         for item in self.ingredients:
             cost += float(prices[item].replace("$", ""))
         return "$%.2f" % cost
+
 
 csv_file_name = "prices.csv"
 prices = csv_dict(csv_file_name)
