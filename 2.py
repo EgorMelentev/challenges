@@ -1,11 +1,18 @@
-import pandas as pd
+import csv
+
+def csv_dict(variables_file: str):
+    reader = csv.reader(open(variables_file, 'r'))
+    result = {}
+    for row in reader:
+        key = row[0]
+        result[key] = row[1]
+    return result
 
 class Smoothie:
-    __prices = pd.read_csv('prices.csv', header=None, index_col=0, squeeze=True).to_dict()
-    
+    global prices
     ingredients = []
 
-    def __init__(self, ingred):
+    def __init__(self, ingred: list):
         self.ingredients = ingred
 
     def get_name(self):
@@ -29,15 +36,20 @@ class Smoothie:
     def get_cost(self):
         cost = 0.0
         for item in self.ingredients:
-            cost += float(self.__prices[item].replace("$", ""))
+            cost += float(prices[item].replace("$", ""))
         return "$%.2f" % cost
+
+csv_file_name = "prices.csv"
+prices = csv_dict(csv_file_name)
 
 ban = Smoothie(["Strawberries", "Banana", "Blueberries"])
 bom = Smoothie(["Mango"])
+
 print("\tban")
 print(ban.get_name())
 print(ban.get_cost())
 print(ban.get_price())
+
 print("\tbom")
 print(bom.get_name())
 print(bom.get_cost())

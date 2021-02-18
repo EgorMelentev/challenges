@@ -1,15 +1,25 @@
-import pandas as pd
+import csv
 
-def filter_by_rating(d, rating):
+def csv_dict(variables_file: str):
+    reader = csv.reader(open(variables_file, 'r'))
+    result = {}
+    for row in reader:
+        key = row[0]
+        result[key] = row[1]
+    return result
+
+def filter_by_rating(d: dict, rating: str):
     result = {}
     for item, star in d.items():
         if (star == rating):
             result[item] = star
     return result
 
-dictionary = pd.read_csv('rating.csv', header=None, index_col=0, squeeze=True).to_dict()
+csv_file_name = "rating.csv"
+dictionary = csv_dict(csv_file_name)
 
-rated = filter_by_rating(dictionary, "******")
+rated = filter_by_rating(dictionary, "*****")
+
 if rated == {}:
     print("No results found")
 else:
