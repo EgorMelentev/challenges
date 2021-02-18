@@ -9,6 +9,10 @@ def csv_dict(variables_file: str):
     return result
 
 def filter_by_rating(d: dict, rating: str):
+    """
+    Given a dictionary of some items with star ratings and a specified star rating.\n
+    Return a new dictionary of items which match the specified star rating.
+    """
     result = {}
     for item, star in d.items():
         if (star == rating):
